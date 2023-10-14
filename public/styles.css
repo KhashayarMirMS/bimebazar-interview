@@ -1,0 +1,249 @@
+:root {
+  --primary: #000;
+  --secondary: #ffc453;
+  --grey-50: #f5f5f5;
+  --gery-100: #e0e0e0;
+  --grey-300: #e0e0e0;
+  --green-50: #edfff7;
+  --green-200: #34a862;
+  --spacing: 4;
+  --step-count: 5;
+}
+
+@font-face {
+  font-family: "DanaMedium";
+  font-display: swap;
+  font-style: normal;
+  font-weight: 500;
+  src: url("./fonts/eot/dana-fanum-medium.eot");
+  src: url("./fonts/ttf/dana-fanum-medium.ttf") format("ttf");
+  src: url("./fonts/woff/dana-fanum-medium.woff") format("woff");
+  src: url("./fonts/woff2/dana-fanum-medium.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "DanaSemiBold";
+  font-display: swap;
+  font-style: normal;
+  font-weight: 600;
+  src: url("./fonts/eot/dana-fanum-demibold.eot");
+  src: url("./fonts/ttf/dana-fanum-demibold.ttf") format("ttf");
+  src: url("./fonts/woff/dana-fanum-demibold.woff") format("woff");
+  src: url("./fonts/woff2/dana-fanum-demibold.woff2") format("woff2");
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  direction: rtl;
+  font-family: "DanaMedium", Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 16px;
+}
+
+h4,
+p {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+header {
+  display: flex;
+  align-items: center;
+
+  height: 64px;
+  background-color: var(--primary);
+  padding: 0 calc(var(--spacing) * 3px);
+}
+
+#root {
+  display: grid;
+  padding: calc(var(--spacing) * 3px);
+}
+
+.companies {
+  display: grid;
+  grid-template-columns: repeat(4, calc(25% - calc(var(--spacing) * 1px)));
+  column-gap: calc(var(--spacing) * 1px);
+
+  @media only screen and (max-width: 600px) {
+    grid-template-columns: repeat(2, calc(50% - calc(var(--spacing) * 1px)));
+    gap: calc(var(--spacing) * 2px);
+  }
+
+  @media only screen and (max-width: 300px) {
+    grid-template-columns: repeat(1, 100%);
+    gap: calc(var(--spacing) * 2px);
+  }
+
+  & .company {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
+    position: relative;
+
+    cursor: pointer;
+    border: solid 1px var(--gery-100);
+
+    & h4 {
+      margin-block: 14px;
+    }
+
+    & .companyDetails {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      left: 0;
+
+      height: 30px;
+      background: var(--grey-50);
+      padding: calc(var(--spacing) * 2px) 0;
+
+      display: flex;
+      text-align: center;
+      justify-content: space-evenly;
+
+      & > div {
+        flex: 1;
+      }
+
+      :first-child:not(p) {
+        border-left: solid 1px var(--gery-100);
+      }
+
+      & p {
+        font-size: 10px;
+        &.font-small {
+          font-family: "DanaSemiBold";
+          font-size: 12px;
+        }
+      }
+    }
+  }
+}
+
+#comments {
+  & .comment {
+    font-size: 14px;
+    line-height: 24px;
+    font-weight: 400px;
+
+    box-sizing: border-box;
+    border: solid 1px rgb(224, 224, 224);
+
+    margin: calc(var(--spacing) * 2px) 0;
+    padding: calc(var(--spacing) * 4px) calc(var(--spacing) * 3px);
+
+    & .name {
+      font-size: 16px;
+    }
+
+    & .message {
+      background-color: var(--grey-50);
+      font-size: 14px;
+      padding: calc(var(--spacing) * 4px);
+      margin: calc(var(--spacing) * 2px) 0;
+    }
+
+    & .tags {
+      display: flex;
+      justify-content: flex-start;
+      gap: calc(var(--spacing) * 2px);
+
+      & .chips {
+        padding: 0 calc(var(--spacing) * 2px);
+
+        color: var(--primary-color);
+        border-color: transparent;
+        background-color: var(--grey-50);
+
+        font-size: 12px;
+        font-weight: 600px;
+
+        &.bmbzr {
+          background-color: var(--green-50);
+          color: var(--green-200);
+          border-color: transparent;
+        }
+      }
+    }
+    .progressBarContainer {
+      display: flex;
+      width: 68px;
+      height: 6px;
+    }
+
+    .QuantumProgressBar {
+      display: flex;
+      flex-direction: row;
+
+      & .labelItem {
+        position: relative;
+        margin: 0;
+        padding: 0;
+
+        display: block;
+        white-space: nowrap;
+        height: 8px;
+        background-color: var(--grey-300);
+        width: calc(100% / var(--step-count));
+
+        &:first-child {
+          padding-right: 4px;
+        }
+        &:not(:last-child) {
+          margin-left: 10px;
+        }
+
+        &.highlighted {
+          background-color: var(--secondary);
+          &:not(:last-child)::after {
+            border-right-color: var(--secondary);
+          }
+
+          &:not(:first-child)::before {
+            border-color: var(--secondary);
+            border-right-color: transparent;
+          }
+        }
+
+        &:not(:last-child)::after,
+        &:not(:first-child)::before {
+          position: absolute;
+          content: "";
+          top: 0;
+          width: 0;
+          height: 0;
+          border-width: 4px;
+          border-style: solid;
+        }
+
+        &:not(:last-child)::after {
+          left: -8px;
+          border-color: transparent;
+          border-right-color: var(--grey-300);
+        }
+
+        &:not(:first-child)::before {
+          right: -8px;
+          border-color: var(--grey-300);
+          border-right-color: transparent;
+        }
+      }
+    }
+  }
+}
+
+.flex {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.ratingLabel {
+  font-size: 12px;
+  margin-right: calc(var(--spacing) * 2px);
+  color: var(--secondary);
+}
